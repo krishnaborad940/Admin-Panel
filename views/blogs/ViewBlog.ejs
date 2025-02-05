@@ -1,0 +1,158 @@
+<%- include("../header") %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Admin</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Blogs</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">view Blogs</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+          
+              
+              <!-- /.col -->
+             
+            <div style="display: flex; margin-bottom: 20px;">
+              <form action="" >
+                <input type="text" name="blogSearch" value="<%= search %>">
+                <input type="submit" value="submit">
+        </form>
+        <a href="/blogs/viewBlog" style="margin-left: 10px;"><button>reset</button></a>
+            </div>
+           
+
+
+            <form action="/blogs/MultipleDelete" method="post">
+      
+                <!-- /.card -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">View Admin Data</h3>
+                     <a href="/blogs/asendingData" class="btn btn-success">asc</a>
+            <a href="/blogs/desendingData" class="btn btn-danger">desc</a>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                         <th><input type="checkbox" id="checkAll">
+                          <button type="submit"  id="btncheck"><i class="bi bi-trash3" id="btncheck"></i></button>
+                        </th>
+                          <th>category Name</th>
+                          <th>Title</th>
+                          <th>description</th>
+                          <th>image</th>
+                          <th>status</th>
+                          <!-- <th> Date</th> -->
+                       <th>Action</th>
+                        </tr>
+                      </thead>
+                
+                      <tbody>
+                        <% viewBlogData.map((v,i)=>{ %>
+                      <tr class="align-middle">
+                        <th><input type="checkbox" name="checkInput" value="<%= v.id %>"></th>
+                          <td><%= v.categoryId.categoryName %></td>
+                          <td><%= v.title %></td>
+                          <td><%- v.description.substr(0,20) %>...</td>
+                          <td><img src="<%= v.image %>"  height="100px"></td>
+                          <td>
+                            <% if(v.status){ %>
+                              <a href="/blogs/ActiveStatus/?blogId=<%= v.id %>&status=true" class="btn btn-success">Active</a>
+                           <% } else { %> 
+                            <a href="/blogs/DeActiveStatus/?blogId=<%= v.id %>&status=false" class="btn btn-danger">DeActive</a>
+                            <% } %>
+                           
+                          <td><a href="/blogs/deleteBlog/?id=<%= v.id %>"><ion-icon name="trash-outline" style="font-size: 20px; color: black;"></ion-icon></a>
+                          <a href="/blogs/updateBlog/?id=<%= v.id %>"><ion-icon name="create-outline" style="font-size: 20px; color: black;"></ion-icon></a> </td>
+                         
+                        </tr>
+                 <%   }) %>
+                       
+                       
+                       
+                      </tbody>
+                     
+                    </table>
+                   
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </form>
+              <div style="margin-top: 20px;">
+                <tr >
+                  <td>
+                   <% for(var i=0;i<totalData;i++) { %>
+                      <a href="?page=<%= i %>"><button><%= i+1 %></button></a>
+                       <% } %>
+                  </td>
+                  </tr>
+              </div>
+             <br>
+                <tr>
+
+
+
+                  <td>
+           
+                    <% if(parseInt(page) > 0){ %>  
+                       <a href="/blogs/viewBlog?page=<%= parseInt(page)-1 %>" ><button >prev</button></a>
+                       <%}else{  %>
+          <button disabled >prev</button>
+                   <% } %>
+                  <a href="/blogs/viewBlog?page=<%= page %>"><button><%= parseInt(page)+1 %></button></a>
+                      <!-- <a href="/blogs/viewBlog?page=<%= parseInt(page)+1 %>"><button>next</button></a> -->
+               
+                 <% if(parseInt(page) < totalData-1){ %>  
+                       <a href="/blogs/viewBlog?page=<%= parseInt(page)+1 %>" ><button >next</button></a>
+                       <%}else{  %>
+          <button disabled >next</button>
+                   <% } %>
+                
+                  </td>
+              </tr>
+                <!-- /.card -->
+             
+              <!-- /.col -->
+            
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+      <!--begin::Footer-->
+      
+<%- include("../footer") %>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+  $('#btncheck').hide();
+  $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  $('#btncheck').toggle();
+   
+});
+</script>

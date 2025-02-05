@@ -1,0 +1,140 @@
+<%- include("../header") %>
+
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row">
+          <div class="col-sm-6"><h3 class="mb-0">General Form</h3></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">category</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Update Category</li>
+            </ol>
+          </div>
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content Header-->
+    <!--begin::App Content-->
+    <div class="app-content">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row g-4">
+          <!--begin::Col-->
+          <div class="col-12">
+            <div class="callout callout-info">
+              For detailed documentation of Form visit
+              <a
+                href="https://getbootstrap.com/docs/5.3/forms/overview/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="callout-link"
+              >
+                Bootstrap Form
+              </a>
+            </div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-md-6">
+            <!--begin::Quick Example-->
+            <div class="card card-primary card-outline mb-4">
+              <!--begin::Header-->
+              <div class="card-header"><div class="card-title">Add Admin</div></div>
+              <!--end::Header-->
+              <!--begin::Form-->
+              <form method="post" action="/category/editCategory" >
+                <input type="hidden" name="id" value="<%= findid.id %>">
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="exampleInputname" class="form-label">category Name</label>
+                        <input type="text" class="form-control" name="categoryName" value="<%= findid.categoryName %>" />
+                      </div>
+                      <div class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">status</legend>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="status"
+                             
+                              value="true"
+
+                              checked
+                              <% if(findid.status=='true'){ %> <%= 'checked' %> <% } %>
+                            />
+                            <label class="form-check-label"> true </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="status"
+                              id="gridRadios2"
+                              value="false"
+                              <% if(findid.status=='false'){ %> <%= 'checked' %> <% } %>
+                            />
+                            <label class="form-check-label" for="gridRadios2"> false </label>
+                          </div>
+                         
+                        </div>
+                    </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Created Date</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      name="createdDate"
+                      aria-describedby="emailHelp"
+                      value="<%= findid.createdDate %>"
+                    />
+                   
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">update date</label>
+                    <input type="date" class="form-control" id="exampleInputPassword1"value="<%= findid.createdDate %>" name="updatedDate" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">blog</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" name="blogId" />
+                  </div>
+                 
+                 
+               
+                 
+                 
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit"  >update</button>
+                </div>
+                <!--end::Footer-->
+              </form>
+              <!--end::Form-->
+            </div>
+            <!--end::Quick Example-->
+            <!--begin::Input Group-->
+            
+            <!--end::Input Group-->
+          
+          </div>
+          
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content-->
+  </main>
+
+<%-include("../footer") %>

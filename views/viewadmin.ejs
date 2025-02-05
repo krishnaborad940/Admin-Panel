@@ -1,0 +1,145 @@
+<%- include("header") %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Admin</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"> View Admin</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+          
+              
+              <!-- /.col -->
+              <div style="display: flex; margin-bottom: 20px;">
+                <form action="" >
+                  <input type="text" name="adminSearch" value="<%= search %>">
+                  <input type="submit" value="submit">
+          </form>
+          <a href="/viewadmin" style="margin-left: 10px;"><button>reset</button></a>
+              </div>
+                <form action="/MultipleDeleteAdmin" method="post">
+
+              
+                <!-- /.card -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">View Admin Data</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                        <th><input type="checkbox" id="checkAll">
+                         <button type="submit" id="btnadmin"><i  class="bi bi-trash3"></i></button>
+                        </th> 
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Gender</th>
+                          <th>Hobby</th>
+                          <th>City</th>
+                          <th>Images</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                
+                      <tbody>
+                        <% viewdata.map((v,i)=>{ %>
+                      <tr class="align-middle">
+                       <th> <input type="checkbox" name="checkadmin" value="<%= v.id %>"></th>
+                          <td><%= v.name %></td>
+                          <td><%= v.email %></td>
+                          <td><%= v.gender %></td>
+                          <td><%= v.hobby %></td>
+                          <td><%= v.city %></td>
+                          <td><img src="<%= v.image %>" width="100px"/></td>
+                          <td><a href="/deleteadmin/<%= v.id %>"><ion-icon name="trash-outline" style="font-size: 20px; color: black;"></ion-icon></a>
+                          <a href="/updateadmin/?adminid=<%= v.id %>"><ion-icon name="create-outline" style="font-size: 20px; color: black;"></ion-icon></a> </td>
+                         
+                        </tr>
+                 <%   }) %>
+                       
+                       
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </form>
+                <!-- /.card -->
+                <div style="margin-top: 20px;">
+                  <tr >
+                    <td>
+                     <% for(var i=0;i<totalData;i++) { %>
+                        <a href="?page=<%= i %>"><button><%= i+1 %></button></a>
+                         <% } %>
+                    </td>
+                    </tr>
+                </div>
+               <br>
+                  <tr>
+  
+  
+  
+                    <td>
+             
+                      <% if(parseInt(page) > 0){ %>  
+                         <a href="/viewadmin?page=<%= parseInt(page)-1 %>" ><button >prev</button></a>
+                         <%}else{  %>
+            <button disabled >prev</button>
+                     <% } %>
+                    <a href="/viewadmin?page=<%= page %>"><button><%= parseInt(page)+1 %></button></a>
+                        <!-- <a href="/blogs/viewBlog?page=<%= parseInt(page)+1 %>"><button>next</button></a> -->
+                 
+                   <% if(parseInt(page) < totalData-1){ %>  
+                         <a href="/viewadmin?page=<%= parseInt(page)+1 %>" ><button >next</button></a>
+                         <%}else{  %>
+            <button disabled >next</button>
+                     <% } %>
+                  
+                    </td>
+                </tr>
+              <!-- /.col -->
+            
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+      <!--begin::Footer-->
+      
+<%- include("footer") %>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+  $('#btnadmin').hide();
+  $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  $('#btnadmin').toggle();
+   
+});
+</script>

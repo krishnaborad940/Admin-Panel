@@ -1,0 +1,164 @@
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+          
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-success {
+            background-color: green;
+            color: wheat;
+            border: 1px solid black;
+        }
+
+        .btn-danger {
+            background-color: red;
+            color: #ffffff;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        img {
+            border-radius: 5px;
+        }
+    </style>
+
+<%- include('header') %>
+
+<main class="app-main">
+   <!--begin::App Content Header-->
+   <div class="app-content-header">
+     <!--begin::Container-->
+     <div class="container-fluid">
+       <!--begin::Row-->
+       <div class="row">
+         <div class="col-sm-6"><h3 class="mb-0">General Form</h3></div>
+         <div class="col-sm-6">
+           <ol class="breadcrumb float-sm-end">
+             <li class="breadcrumb-item"><a href="#">view commets</a></li>
+             <li class="breadcrumb-item active" aria-current="page">view comment</li>
+           </ol>
+         </div>
+       </div>
+       <!--end::Row-->
+     </div>
+     <!--end::Container-->
+   </div>
+   <!--end::App Content Header-->
+   <!--begin::App Content-->
+   <div class="app-content">
+     <!--begin::Container-->
+     <div class="container-fluid">
+       <!--begin::Row-->
+       <div class="row g-4">
+         <!--begin::Col-->
+         <div class="col-12">
+           <div class="callout callout-info">
+             For detailed documentation of Form visit
+             <a
+               href="https://getbootstrap.com/docs/5.3/forms/overview/"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="callout-link"
+             >
+               Bootstrap Form
+             </a>
+           </div>
+         </div>
+         <!--end::Col-->
+         <!--begin::Col-->
+         <div class="col-md-6">
+           <!--begin::Quick Example-->
+           <div class="card card-primary card-outline mb-4">
+             <!--begin::Header-->
+             <div class="card-header"><div class="card-title">Add Admin</div></div>
+             <!--end::Header-->
+             <!--begin::Form-->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Comments</th>
+            <th>Image</th>
+            <th>Status</th>
+        </tr>
+
+        <% viewcomments.map((v, i) => { %>
+        <tr>
+            <td><%= v.name %></td>
+            <td><%= v.email %></td>
+            <td><h4><%= v.comments %></h4></td>
+            <td><img src="<%= v.Image %>" width="100px" alt="User Image"></td>
+            <td>
+                <% if (v.status) { %>
+                    <a href="/ActiveStatus/?comId=<%= v.id %>&status=true" class="btn btn-success">Active</a>
+                <% } else { %>
+                    <a href="/DeActiveStatus/?comId=<%= v.id %>&status=false" class="btn btn-danger">DeActive</a>
+                <% } %>
+            </td>
+        </tr>
+        <% }) %>
+    </table>
+
+   </div>
+   <!--end::Quick Example-->
+   <!--begin::Input Group-->
+   
+   <!--end::Input Group-->
+ 
+ </div>
+ 
+</div>
+<!--end::Row-->
+</div>
+<!--end::Container-->
+</div>
+<!--end::App Content-->
+</main>
+
+<%-include("footer") %>

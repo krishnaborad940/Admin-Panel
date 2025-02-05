@@ -1,0 +1,150 @@
+<%- include("../header.ejs") %>
+
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row">
+          <div class="col-sm-6"><h3 class="mb-0">General Form</h3></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">Blogs</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Add Blogs</li>
+            </ol>
+          </div>
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content Header-->
+    <!--begin::App Content-->
+    <div class="app-content">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row g-4">
+          <!--begin::Col-->
+          <div class="col-12">
+            <div class="callout callout-info">
+              For detailed documentation of Form visit
+              <a
+                href="https://getbootstrap.com/docs/5.3/forms/overview/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="callout-link"
+              >
+                Bootstrap Form
+              </a>
+            </div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-md-6">
+            <!--begin::Quick Example-->
+            <div class="card card-primary card-outline mb-4">
+              <!--begin::Header-->
+              <div class="card-header"><div class="card-title">Add Admin</div></div>
+              <!--end::Header-->
+              <!--begin::Form-->
+              <form method="post" action="/blogs/insertBlog" enctype="multipart/form-data" >
+                <!--begin::Body-->
+                <div class="card-body">
+                    <!-- category -->
+                     <div class="mb-3">
+                         <label for="exampleInputname" class="form-label">category Name</label>
+                      
+                         <select name="categoryId" id="" class="form-control">
+                          <option value="">--select category--</option>
+                          <% categorydata.map((v, i) => { %>
+                              <option value="<%= v.id %>" <% if(old && old.categoryId){ if(old.categoryId==v.id){ %><%= "selected" %><%}} %>><%= v.categoryName %></option>
+                              
+                          <% }); %>
+                      </select>
+                          <% if(errorsData && errorsData.categoryId){  %>
+                          <span style="color: red;">
+                          <%= errorsData.categoryId.msg %>
+                          </span>
+                          <% } %>
+
+                      
+                      </div>
+                 <!-- title -->
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Blog Title</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="title"  value="<% if(old &&old.title){ %><%= old.title %><% } %>"/>
+                          <% if(errorsData && errorsData.title){  %>
+                          <span style="color: red;">
+                          <%= errorsData.title.msg %>
+                          </span>
+                          <% } %>
+                      </div>
+                <!-- description -->
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <textarea name="description" id="" value="<% if(old &&old.description){ %><%= old.description %><% } %>"/></textarea>
+                    <% if(errorsData && errorsData.description){  %>
+                      <span style="color: red;">
+                      <%= errorsData.description.msg %>
+                      </span>
+                      <% } %>
+                  </div>
+
+                  <!-- status -->
+                     
+<!-- 
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">status</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" name="status" />
+                    </div> -->
+
+      
+               
+                  <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile02" name="image"/>
+                    <label class="input-group-text" for="inputGroupFile02" name="image">Upload</label>
+                  </div>
+                 
+               
+                 
+                 
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                <div class="card-footer">
+                <input type="submit" value="submit">
+                  <!-- <button type="submit" class="btn btn-primary" name="submit">Submit</button> -->
+                </div>
+                <!--end::Footer-->
+              </form>
+              <!--end::Form-->
+            </div>
+            <!--end::Quick Example-->
+            <!--begin::Input Group-->
+            
+            <!--end::Input Group-->
+          
+          </div>
+          
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content-->
+  </main>
+
+<%-include("../footer") %>
+<!-- Place the first <script> tag in your HTML's <head> -->
+  <script src="https://cdn.tiny.cloud/1/9pz89pjarqct1g9i6e3axem5x3tjd3lf8m4s4ssq21ubs6a4/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+  <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    });
+  </script>

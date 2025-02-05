@@ -1,0 +1,192 @@
+<%- include("header") %>
+
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row">
+          <div class="col-sm-6"><h3 class="mb-0">General Form</h3></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">General Form</li>
+            </ol>
+          </div>
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content Header-->
+    <!--begin::App Content-->
+    <div class="app-content">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row g-4">
+          <!--begin::Col-->
+          <div class="col-12">
+            <div class="callout callout-info">
+              For detailed documentation of Form visit
+              <a
+                href="https://getbootstrap.com/docs/5.3/forms/overview/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="callout-link"
+              >
+                Bootstrap Form
+              </a>
+            </div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-md-6">
+            <!--begin::Quick Example-->
+            <div class="card card-primary card-outline mb-4">
+              <!--begin::Header-->
+              <div class="card-header"><div class="card-title">Add Admin</div></div>
+              <!--end::Header-->
+              <!--begin::Form-->
+              <form method="post" action="/editadmin" enctype="multipart/form-data">
+                <input type="hidden" name="aid" value="<%= singleadmin.id %>"/>
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="exampleInputname" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="fname"  value="<%= singleadmin.name %>"/>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="lname"  value="<%= singleadmin.name %>" />
+                      </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      name="email"
+                      aria-describedby="emailHelp"
+                      value="<%= singleadmin.email %>"
+                    />
+                    <div id="emailHelp" class="form-text">
+                      We'll never share your email with anyone else.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password"  value="<%= singleadmin.password %>" />
+                  </div>
+                  <div class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          
+                          value="Male"
+                          checked
+                          <% if(singleadmin.gender=="Male"){ %> <%= 'checked' %> <% } %>
+                        />
+                        <label class="form-check-label"> Male </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="gridRadios2"
+                          value="Female"
+                          <% if(singleadmin.gender=="Female"){ %> <%= 'checked' %> <% } %>
+                        />
+                        <label class="form-check-label" for="gridRadios2"> Female </label>
+                      </div>
+                     
+                    </div>
+                </div>
+                  <div class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Hobby</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="hobby"
+                          value="Dancing"
+                          <% if(singleadmin.hobby.includes("Dancing")){ %><%= 'checked' %><% } %>
+                        
+                        />
+                        <label class="form-check-label"> Dancing </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="hobby"
+                          value="Travelling"
+                          <% if(singleadmin.hobby.includes("Travelling")){ %><%= 'checked' %><% } %>
+                        
+                        />
+                        <label class="form-check-label"> Travelling </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="hobby"
+                          value="Reading"
+                          <% if(singleadmin.hobby.includes("Reading")){ %><%= 'checked' %><% } %>
+                        
+                        />
+                        <label class="form-check-label"> Reading </label>
+                      </div>
+                     
+                     
+                    </div>
+                </div>
+                <% cityarry=["Surat","navsari","vadodra"] %>
+                <div class=" col-md-6 mb-3">
+                    <label for="validationCustom04" class="form-label">City</label>
+                    <select class="form-select" name="city" id="validationCustom04" required>
+                      <option selected disabled value="">Choose...</option>
+                     <% cityarry.map((v,i)=>{ %>
+                        <option value="<%= v %>" <% if(singleadmin.city==v){ %><%= 'selected' %><% } %>><%= v %> </option>
+                   <%  }) %>
+                    </select>
+                   
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile02" name="image"/><img src="<%= singleadmin.image %>" width="100px"/>
+                    <label class="input-group-text" for="inputGroupFile02" name="image">Upload</label>
+                  </div>
+                 
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                </div>
+                <!--end::Footer-->
+              </form>
+              <!--end::Form-->
+            </div>
+            <!--end::Quick Example-->
+            <!--begin::Input Group-->
+            
+            <!--end::Input Group-->
+          
+          </div>
+          
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content-->
+  </main>
+
+<%-include("footer") %>

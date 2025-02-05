@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #008080;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="/img/credit/logo.png" alt="Logo" width="200px" height="50px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent" style="margin-left: 100px;">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-white" href="#">Home</a>
+                </li>
+                <li>
+                    <% if(locals.user) { %>
+                        <%= locals.user.username %>
+                        <%  } else { %> 
+                            <a href="/userLogin"  class="btn btn-success ms-4">Login</a></li>
+               <%  } %>
+                <li>
+                    <% if(locals.user) { %>
+                     <a href="/logout" class="btn btn-success ms-4">logout</a>
+                        <%  } else { %> 
+                            <a href="/userRegister"  class="btn btn-success ms-4">Register</a></li>
+               <%  } %>
+                    
+            </ul>
+            <!-- Sorting Form -->
+            <form class="d-flex align-items-center me-3">
+                <select class="form-select me-2" name="sorting">
+                    <option value="">--Select--</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button class="btn btn-primary" type="submit">Sort</button>
+            </form>
+            <!-- Search Form -->
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" name="homeSearch" value="<%= search %>">
+                <button class="btn btn-success" type="submit">Search</button>
+                <a href="/" class="btn btn-secondary ms-2">Reset</a>
+            </form>
+        </div>
+    </div>
+</nav>

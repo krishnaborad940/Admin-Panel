@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            background-color: #F3F3F6;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #008080;
+        }
+
+        .navbar-brand img {
+            width: 100px;
+            height: 50px;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        .btn-success {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-success:hover {
+            background-color: #138f9a;
+        }
+
+        /* Sidebar */
+        .w-20 {
+            width: 20%;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+        }
+
+        .w-20 ul {
+            padding: 20px;
+        }
+
+        .w-20 li {
+            list-style: none;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .w-20 a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .w-20 a:hover {
+            color: #0056b3;
+        }
+
+        /* Content Section */
+        .w-70 {
+            width: 75%;
+            margin-left: 25px;
+        }
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            border-radius: 5px;
+        }
+
+        .card h6 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card p {
+            color: grey;
+            margin: 5px 0;
+        }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .pagination-container .btn {
+            margin: 0 5px;
+        }
+
+        .footer {
+            background-color: #e3f2fd;
+            color: black;
+            text-align: center;
+            padding: 20px 0;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <%- include('userheader') %></5->
+
+    <!-- Main Content -->
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="w-20">
+            <ul class="list-group" >
+                <li class="list-group-item bg-secondary text-white">All (<%= allBlogCount %>)</li>
+                <% allCategorys.map((v, i) => { %>
+                <li class="list-group-item">
+                    <a href="/?catid=<%= v.id %>&sorting=<%= sortData %>"><%= v.categoryName %> (<%= v.blogId.length %>)</a>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+
+        <!-- Blog Posts -->
+        <div class="w-70">
+            <% allBlog.map((v, i) => { %>
+            <div class="card p-3">
+                <div class="d-flex">
+                    <img src="<%= v.image %>" height="100px" width="100px" alt="">
+                    <div class="ms-3">
+                        <h6><%= v.title %></h6>
+                        <p><%- v.description.substr(0, 50) %> <a href="/readMore/<%= v.id %>">Read More...</a></p>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <% if (parseInt(page) > 0) { %>
+                <a href="/?page=<%= parseInt(page) - 1 %>&homeSearch=<%= search %>" class="btn btn-secondary">Prev</a>
+                <% } else { %>
+                <button class="btn btn-secondary" disabled>Prev</button>
+                <% } %>
+                <a href="/?page=<%= page %>&homeSearch=<%= search %>" class="btn btn-primary"><%= parseInt(page) + 1 %></a>
+                <% if (parseInt(page) < totalData - 2) { %>
+                <a href="/?page=<%= parseInt(page) + 1 %>&homeSearch=<%= search %>" class="btn btn-secondary">Next</a>
+                <% } else { %>
+                <button class="btn btn-secondary" disabled>Next</button>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 My Blog. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
